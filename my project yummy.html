@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Yummy – Recipe Website</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  font-style: italic;
+  background:linear-gradient(to right,#ffe0e9,#fff5f8);
+}
+header{
+  background:#ff5f9e;
+  color:white;
+  text-align:center;
+  padding:30px;
+  position:relative;
+}
+.back-btn{
+  position:absolute;
+  left:20px;
+  top:25px;
+  font-size:24px;
+  cursor:pointer;
+}
+.search{
+  text-align:center;
+  margin:20px;
+}
+.search input{
+  padding:10px;
+  width:260px;
+  border-radius:20px;
+  border:1px solid #ccc;
+}
+.search button{
+  padding:10px 20px;
+  border:none;
+  border-radius:20px;
+  background:#ff5f9e;
+  color:white;
+  cursor:pointer;
+}
+.recipes{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+  padding:20px;
+}
+.card{
+  background:white;
+  padding:15px;
+  border-radius:15px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+.card h3{
+  color:#ff5f9e;
+}
+footer{
+  background:#ff5f9e;
+  color:white;
+  text-align:center;
+  padding:10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <span class="back-btn" onclick="goBack()">⬅️</span>
+  <h1>🍓 Yummy</h1>
+  <p>Indian • Italian • Asian • Desserts</p>
+</header>
+
+<div class="search">
+  <input type="text" id="searchInput" placeholder="Search recipe">
+  <button onclick="searchRecipe()">Search</button>
+</div>
+
+<div class="recipes" id="recipeBox"></div>
+
+<footer>
+  <p>© 2025 Yummy | Delicious Recipes</p>
+</footer>
+
+<script>
+const recipes = [
+
+{
+name:"🍕 Margherita Pizza",
+ing:[
+"Pizza base (medium size)",
+"Fresh tomato puree",
+"Mozzarella cheese (grated)",
+"Olive oil",
+"Salt to taste",
+"Black pepper",
+"Dry oregano",
+"Fresh basil leaves"
+],
+steps:[
+"Preheat the oven to 220°C",
+"Place pizza base on baking tray",
+"Spread tomato puree evenly",
+"Season with salt and pepper",
+"Add grated mozzarella cheese",
+"Sprinkle oregano on top",
+"Drizzle olive oil lightly",
+"Bake for 12–15 minutes and serve hot"
+]
+},
+
+{
+name:"🍝 White Sauce Pasta",
+ing:[
+"Pasta (penne or fusilli)",
+"Butter",
+"Garlic cloves (chopped)",
+"All-purpose flour",
+"Milk",
+"Cheese (grated)",
+"Salt to taste",
+"Black pepper"
+],
+steps:[
+"Boil pasta in salted water",
+"Drain and keep aside",
+"Heat butter in a pan",
+"Sauté garlic until aromatic",
+"Add flour and mix well",
+"Pour milk slowly while stirring",
+"Add cheese, salt, and pepper",
+"Mix pasta with sauce and serve"
+]
+},
+
+{
+name:"🍰 Chocolate Cake",
+ing:[
+"All-purpose flour",
+"Cocoa powder",
+"Sugar",
+"Butter",
+"Milk",
+"Baking powder",
+"Vanilla essence",
+"Eggs"
+],
+steps:[
+"Preheat oven to 180°C",
+"Grease and line cake tin",
+"Mix flour, cocoa, and baking powder",
+"Cream butter and sugar together",
+"Add eggs one by one",
+"Add milk and vanilla essence",
+"Pour batter into cake tin",
+"Bake for 35–40 minutes"
+]
+},
+
+{
+name:"🍜 Veg Fried Rice",
+ing:[
+"Cooked basmati rice",
+"Carrot, beans, capsicum",
+"Garlic (chopped)",
+"Ginger (chopped)",
+"Soy sauce",
+"Oil",
+"Salt to taste",
+"Pepper"
+],
+steps:[
+"Heat oil in a wok",
+"Add garlic and ginger",
+"Sauté until fragrant",
+"Add chopped vegetables",
+"Stir fry on high heat",
+"Add cooked rice",
+"Pour soy sauce and seasoning",
+"Mix well and serve hot"
+]
+},
+
+{
+name:"🇮🇳 Paneer Butter Masala",
+ing:[
+"Paneer cubes",
+"Tomato puree",
+"Butter",
+"Fresh cream",
+"Onion paste",
+"Ginger-garlic paste",
+"Red chilli powder",
+"Salt to taste"
+],
+steps:[
+"Heat butter in a pan",
+"Add onion paste and sauté",
+"Add ginger-garlic paste",
+"Cook till raw smell disappears",
+"Add tomato puree",
+"Add spices and salt",
+"Add paneer and cream",
+"Simmer and serve with naan"
+]
+}
+
+];
+
+function show(list){
+  document.getElementById("recipeBox").innerHTML="";
+  list.forEach(r=>{
+    document.getElementById("recipeBox").innerHTML+=`
+      <div class="card">
+        <h3>${r.name}</h3>
+        <b>Ingredients:</b>
+        <ul>${r.ing.map(i=>`<li>${i}</li>`).join("")}</ul>
+        <b>Steps:</b>
+        <ol>${r.steps.map(s=>`<li>${s}</li>`).join("")}</ol>
+      </div>`;
+  });
+}
+
+function searchRecipe(){
+  let val=document.getElementById("searchInput").value.toLowerCase();
+  show(recipes.filter(r=>r.name.toLowerCase().includes(val)));
+}
+
+function goBack(){
+  document.getElementById("searchInput").value="";
+  show(recipes);
+}
+
+show(recipes);
+</script>
+
+</body>
+</html>
